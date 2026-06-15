@@ -1,1 +1,227 @@
 
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hajko 1 👑</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* شاشەی سەرەتا (Click to Enter) */
+        #enter-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            cursor: pointer;
+            color: #fff;
+            font-size: 22px;
+            letter-spacing: 1px;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        /* وێنەی پشت بنەمای جوڵاو و تاریک */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        /* چینی ڕەنگ بۆ تاریککردنی پشت بنەما ڕێک وەک ڤیدیۆکە */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        /* بەشی بارینی بەفر */
+        .snow-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* کارتی شووشەیی ناوەڕاست (Glassmorphism) */
+        .main-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 370px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 20px;
+            text-align: center;
+            color: #fff;
+            z-index: 3;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* وێنەی بازنەیی پڕۆفایل بە چوارچێوەی زێڕین */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #cca43b;
+            margin-bottom: 15px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(204, 164, 59, 0.3);
+        }
+
+        /* ناوی پڕۆفایل */
+        .profile-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        /* دەقی بایۆ یان زیکرەکە */
+        .profile-bio {
+            font-size: 15px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* بەشی ئایکۆنەکانی سۆشیاڵ میدیا */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 26px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        /* کاریگەری کاتێک ماوس دەچێتە سەر دوگمەکان */
+        .social-icons a:hover {
+            transform: scale(1.25);
+            color: #cca43b;
+        }
+
+        /* ئەنیمەیشنی دڵۆپە بەفرەکان */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10px;
+                transform: translateX(0);
+            }
+            100% {
+                top: 100vh;
+                transform: translateX(80px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="enter-screen" onclick="startPage()">
+        <p>click to enter...</p>
+    </div>
+
+    <audio id="bg-audio" src="music.mp3" loop></audio>
+
+    <div class="background-container">
+        <div class="overlay"></div>
+        <div class="snow-container" id="snow"></div>
+    </div>
+
+    <div class="main-container">
+        <img class="profile-img" src="" alt="Profile">
+        
+        <h1 class="profile-name">hajko 1 👑</h1>
+        
+        <p class="profile-bio">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ</p>
+        
+        <div class="social-icons">
+            <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://spotify.com" target="_blank"><i class="fab fa-spotify"></i></a>
+            <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+    </div>
+
+    <script>
+        function startPage() {
+            // ونکردنی شاشەی سەرەتا
+            const enterScreen = document.getElementById('enter-screen');
+            enterScreen.style.opacity = '0';
+            setTimeout(() => {
+                enterScreen.style.display = 'none';
+            }, 500);
+            
+            // کارپێکردنی دەنگی تیکتۆک
+            const audio = document.getElementById('bg-audio');
+            audio.play().catch(error => console.log("لێدانی دەنگ بلۆک کراوە لە لایەن وێبگەڕەوە"));
+            
+            // چالاککردنی بارینی بەفرەکە
+            createSnow();
+        }
+
+        // دروستکردنی بەفر بە شێوازی داینامیکی
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            const numberOfSnowflakes = 35; // ژمارەی دڵۆپە بەفرەکان
+
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2.5) + 's'; 
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                snowflake.style.fontSize = (Math.random() * 8 + 10) + 'px';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                
+                snowContainer.appendChild(snowflake);
+            }
+        }
+    </script>
+</body>
+</html>
